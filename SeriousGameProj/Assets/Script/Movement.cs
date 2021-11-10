@@ -39,9 +39,9 @@ public class Movement : MonoBehaviour
 	void FixedUpdate()
 	{
 
-		//rigid.velocity = new Vector2(movement * speed, rigid.velocity.y);
+		rigid.velocity = new Vector2(movement.x * speed, rigid.velocity.y);
 
-		rigid.MovePosition(rigid.position + movement * speed * Time.fixedDeltaTime);
+		// rigid.MovePosition( new Vector2(movement.x * speed * Time.fixedDeltaTime, 0));
 
 		if (move > .01 || move < -0.1)
 		{

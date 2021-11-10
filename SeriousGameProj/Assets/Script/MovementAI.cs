@@ -7,6 +7,7 @@ public class MovementAI : MonoBehaviour
 
     //used to tweak how fast AI will move around scene
     public float speed;
+    bool flipped = false;
     private float waitTime;
     public float startWaitTime;
 
@@ -25,6 +26,7 @@ public class MovementAI : MonoBehaviour
 
     void Update()
     {
+        
         transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
@@ -33,6 +35,7 @@ public class MovementAI : MonoBehaviour
             {
                 randomSpot = Random.Range(0, moveSpots.Length);
                 waitTime = startWaitTime;
+                flipped = false;
             }
             else
             {
@@ -47,7 +50,7 @@ public class MovementAI : MonoBehaviour
         if (isFacingRight && transform.localScale.x < 0
             || !isFacingRight && transform.localScale.x > 0)
         {
-            Flip();
+            if(!flipped)Flip();
         }
     }
 
@@ -55,6 +58,7 @@ public class MovementAI : MonoBehaviour
     {
         // invert the local X-axis scale
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        flipped = true;
     }
 
 
